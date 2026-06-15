@@ -1,0 +1,18 @@
+Microservices
+
+Since in this project, there are 5 microservices, so there will be 5 requirements.txt files, 5 docker files and 5 CI/CD files. 
+In EKS cluster, there will be one cluster but inside that cluster there will be 5 nodes. There will be 5 ECR repositories.
+
+
+Gateway Service: 
+It is an entry point and a security layer. The GitHub PR request will go to this gateway service and validate if it is coming from GitHub or any other sources. 
+
+Webhook Service: 
+It acts like an event processor and also does the job of job creation. After the request has gone through the gateway service, it will come to the webhook where it will extract information from the request (PR, repo name, signature id) and store it in RDS database. This is event processing. Once the event is created, it will take the event, create it into a job and  pass it to Redis for queue management. Redis will give that job to celery workers, and celery workers will execute that job. Celery workers lie between webhook service and orchestrator service.
+
+Orchestrator Service: 
+Acts as a brain of the system. The AI agents in the orchestrator will only analyze the changes made in the code and not the entire code.
+
+Reviewer Service: It will display the output of recommended changes made by the orchestrator service.
+
+5. Learner Service: It acts like continuous improvement system and store the patterns or any other changes in RDS.

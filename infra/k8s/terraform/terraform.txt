@@ -1,0 +1,8 @@
+Terraform is an IAC tool, infrastructure as code.
+There are 3 types of services in cloud:
+- IaaS
+- PaaS
+- SaaS
+
+
+IAC tool will work on IaaS.

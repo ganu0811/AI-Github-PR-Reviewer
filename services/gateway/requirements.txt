@@ -1,0 +1,5 @@
+fastapi
+uvicorn
+httpx
+pydantic-settings
+prometheus-fastpi-instrumentator   #adds monitoring metrics, monitors health of data
