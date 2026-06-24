@@ -24,7 +24,7 @@ module "vpc" {
     public_subnets = ["10.0.1.0/24", "10.0.2.0/24"]
 
     enable_nat_gateway  = false
-    enable_dns_hostness = true
+    enable_dns_hostnames = true
     enable_dns_support  = true
     map_public_ip_on_launch = true
 
@@ -94,7 +94,7 @@ module "eks" {
 
   eks_managed_node_groups = {
     default = {
-      instance_types = ["t3.medium"]
+      instance_types = ["t3.micro"]
 
       min_size     = 1
       max_size     = 3
@@ -255,7 +255,7 @@ resource "aws_iam_role_policy_attachment" "lbc" {
 }
 
 resource "aws_s3_bucket" "reports" {
-  bucket = "ai-code-reviewer-reports"
+  bucket = "ai-code-reviewer-reports-${data.aws_caller_identity.current.account_id}"
 
   tags = {
     Environment = var.environment
